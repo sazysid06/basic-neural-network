@@ -1,0 +1,21 @@
+# Virtual environment
+neural/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# PyTorch and model files
+*.pth
+*.pt
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
