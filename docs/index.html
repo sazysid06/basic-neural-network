@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Neural Network - PyTorch</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+
+        h2 {
+            color: #764ba2;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        ul,
+        ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #d63384;
+        }
+
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .button {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+
+        .button:hover {
+            background: #764ba2;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+        }
+
+        tr:hover {
+            background: #f9f9f9;
+        }
+
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .tech-item {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #667eea;
+        }
+
+        .tech-item strong {
+            color: #667eea;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🧠 Basic Neural Network with PyTorch</h1>
+        <p class="subtitle">A beginner-friendly implementation of neural networks for regression</p>
+
+        <h2>📖 Overview</h2>
+        <p>This project demonstrates the fundamentals of neural networks including:</p>
+        <ul>
+            <li>Network architecture (input, hidden, and output layers)</li>
+            <li>Forward and backward propagation</li>
+            <li>Activation functions (ReLU)</li>
+            <li>Loss functions (Mean Squared Error)</li>
+            <li>Optimization with Stochastic Gradient Descent (SGD)</li>
+            <li>Training and evaluation on real data</li>
+        </ul>
+
+        <h2>📊 Dataset</h2>
+        <ul>
+            <li><strong>California Housing Dataset</strong> (from scikit-learn)</li>
+            <li><strong>Input Features:</strong> 8 (latitude, longitude, housing median age, etc.)</li>
+            <li><strong>Target:</strong> Median house value</li>
+            <li><strong>Samples:</strong> 20,640 (80% training, 20% testing)</li>
+        </ul>
+
+        <h2>🏗️ Model Architecture</h2>
+        <table>
+            <tr>
+                <th>Layer</th>
+                <th>Type</th>
+                <th>Neurons</th>
+                <th>Activation</th>
+            </tr>
+            <tr>
+                <td>Input Layer</td>
+                <td>Dense</td>
+                <td>8</td>
+                <td>—</td>
+            </tr>
+            <tr>
+                <td>Hidden Layer</td>
+                <td>Dense</td>
+                <td>32</td>
+                <td>ReLU</td>
+            </tr>
+            <tr>
+                <td>Output Layer</td>
+                <td>Dense</td>
+                <td>1</td>
+                <td>Linear</td>
+            </tr>
+        </table>
+
+        <h2>⚙️ Hyperparameters</h2>
+        <ul>
+            <li><strong>Learning Rate:</strong> 0.01</li>
+            <li><strong>Batch Size:</strong> 64</li>
+            <li><strong>Number of Epochs:</strong> 100</li>
+            <li><strong>Optimizer:</strong> Stochastic Gradient Descent (SGD)</li>
+            <li><strong>Loss Function:</strong> Mean Squared Error (MSE)</li>
+        </ul>
+
+        <h2>📈 Results</h2>
+        <p>The model achieves good performance with decreasing loss over epochs:</p>
+        <ul>
+            <li><strong>Training Loss (Final):</strong> ~0.32</li>
+            <li><strong>Test Loss:</strong> ~0.33</li>
+        </ul>
+
+        <h2>🛠️ Technologies Used</h2>
+        <div class="tech-stack">
+            <div class="tech-item">
+                <strong>PyTorch</strong><br>
+                Deep learning framework
+            </div>
+            <div class="tech-item">
+                <strong>NumPy</strong><br>
+                Numerical computations
+            </div>
+            <div class="tech-item">
+                <strong>Pandas</strong><br>
+                Data manipulation
+            </div>
+            <div class="tech-item">
+                <strong>Scikit-learn</strong><br>
+                Data preprocessing
+            </div>
+            <div class="tech-item">
+                <strong>Matplotlib</strong><br>
+                Data visualization
+            </div>
+        </div>
+
+        <h2>📝 Quick Start</h2>
+        <pre><code># Clone the repository
+git clone https://github.com/sazysid06/basic-neural-network.git
+cd basic-neural-network
+
+# Create virtual environment
+python -m venv neural
+
+# Activate (Windows)
+neural\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the model
+python neural_network.py</code></pre>
+
+        <a href="https://github.com/sazysid06/basic-neural-network" class="button">View on GitHub</a>
+
+        <footer>
+            <p>📚 Created as a learning project for understanding neural networks fundamentals</p>
+            <p>Licensed under MIT License © 2024</p>
+        </footer>
+    </div>
+</body>
+
+</html>
